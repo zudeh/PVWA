@@ -33,6 +33,21 @@
         Write-Output $Result
       register: log_result
 
+    - name: Print variable item.logPath
+      debug:
+        msg: "item.logPath - {{ item.logPath }}"
+      ignore_errors: yes
+
+    - name: Print variable DEFAULT_LOG_PATH
+      debug:
+        msg: "DEFAULT_LOG_PATH - {{ lookup("config", "DEFAULT_LOG_PATH") | dirname }}"
+      ignore_errors: yes
+
+    - name: Print variable inventory_hostname
+      debug:
+        msg: "inventory_hostname - {{ inventory_hostname }}"
+      ignore_errors: yes
+
     - name: Fetch preinstall log from path
       fetch:
         src: '{{ item.logPath }}'
