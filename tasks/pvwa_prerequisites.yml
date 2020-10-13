@@ -40,7 +40,7 @@
 
     - name: Print variable DEFAULT_LOG_PATH
       debug:
-        msg: "DEFAULT_LOG_PATH - {{ lookup("config", "DEFAULT_LOG_PATH") | dirname }}"
+        msg: 'DEFAULT_LOG_PATH - {{ lookup("config", "DEFAULT_LOG_PATH") | dirname }}'
       ignore_errors: yes
 
     - name: Print variable inventory_hostname
