@@ -40,7 +40,7 @@
 
     - name: Print variable DEFAULT_LOG_PATH
       debug:
-        msg: 'DEFAULT_LOG_PATH - {{ lookup("config", "DEFAULT_LOG_PATH") | dirname }}'
+        msg: 'DEFAULT_LOG_PATH - .'
       ignore_errors: yes
 
     - name: Print variable inventory_hostname
@@ -51,7 +51,7 @@
     - name: Fetch preinstall log from path
       fetch:
         src: '{{ item.logPath }}'
-        dest: '{{ lookup("config", "DEFAULT_LOG_PATH") | dirname }}/pvwa/{{ inventory_hostname }}_preinstall.log'
+        dest: './pvwa/{{ inventory_hostname }}_preinstall.log'
         flat: yes
       with_items:
         - "{{ log_result.stdout | from_json }}"
@@ -67,13 +67,13 @@
     - name: Fetch preinstall log from path
       fetch:
         src: '{{ item.logPath }}'
-        dest: '{{ lookup("config", "DEFAULT_LOG_PATH") | dirname }}/pvwa/{{ inventory_hostname }}_preinstall.log'
+        dest: "./pvwa/{{ inventory_hostname }}_preinstall.log"
         flat: yes
       with_items:
         - "{{ log_result.stdout | from_json }}"
 
     - fail:
-        msg: 'ERROR: Preinstallation failed. For more info check {{ lookup("config", "DEFAULT_LOG_PATH") | dirname }}/pvwa/{{ inventory_hostname }}_preinstall.log'
+        msg: 'ERROR: Preinstallation failed. For more info check ./pvwa/{{ inventory_hostname }}_preinstall.log'
 
 - name: Enable HTTP Activation for .net framework
   win_feature:
